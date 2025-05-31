@@ -22,18 +22,13 @@
 			"net.madmike.OpenPartiesAndTradingClient"
 		]
 	},
-	"mixins": [
-		"open-parties-and-trading.mixins.json",
-		{
-			"config": "open-parties-and-trading.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.16.14",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"open-parties-and-claims": "*",
+		"numismatic-overhaul": "*"
 	},
 	"suggests": {
 		"another-mod": "*"
