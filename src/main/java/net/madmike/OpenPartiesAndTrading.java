@@ -2,10 +2,10 @@ package net.madmike;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.madmike.command.TradeCommand;
+import net.madmike.networking.TradingNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.madmike.net.TradingNetworking;
 
 public class OpenPartiesAndTrading implements ModInitializer {
 	public static final String MOD_ID = "open-parties-and-trading";
