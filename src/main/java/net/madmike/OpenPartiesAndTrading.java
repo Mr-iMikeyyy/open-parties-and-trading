@@ -3,7 +3,7 @@ package net.madmike;
 import net.fabricmc.api.ModInitializer;
 
 import net.madmike.command.TradeCommand;
-import net.madmike.networking.TradingNetworking;
+import net.madmike.networking.ServerNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class OpenPartiesAndTrading implements ModInitializer {
 		LOGGER.info("Initializing Trading Mod...");
 
 		// Register networking
-		TradingNetworking.registerServerHandlers();
+		ServerNetworking.registerServerHandlers();
 
 		// Register screen handlers
 		ModScreens.registerScreenHandlers();

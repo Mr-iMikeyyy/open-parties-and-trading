@@ -2,7 +2,7 @@ package net.madmike.packets;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.madmike.networking.TradingNetworking;
+import net.madmike.networking.ServerNetworking;
 import net.madmike.gui.TradeTab;
 import net.minecraft.network.PacketByteBuf;
 
@@ -12,6 +12,6 @@ public class ClickOfferC2SPacket {
         buf.writeInt(tab.ordinal());
         buf.writeInt(index);
 
-        ClientPlayNetworking.send(TradingNetworking.CLICK_OFFER_PACKET, buf);
+        ClientPlayNetworking.send(ServerNetworking.CLICK_OFFER_PACKET, buf);
     }
 }

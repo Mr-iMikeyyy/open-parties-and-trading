@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class TradingNetworking {
+public class ServerNetworking {
     public static final Identifier TAB_CHANGE_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "tab_change");
     public static final Identifier CLICK_OFFER_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "click_offer");
     public static final Identifier SYNC_OFFERS_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "sync_offers");
