@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class SyncOffersS2CPacket {
+public class SyncAllOffersS2CPacket {
     public static final Identifier ID = new Identifier(OpenPartiesAndTrading.MOD_ID, "sync_offers");
 
     public static void send(ServerPlayerEntity player, List<TradeOffer> offers) {
@@ -18,9 +18,7 @@ public class SyncOffersS2CPacket {
         buf.writeInt(offers.size());
 
         for (TradeOffer offer : offers) {
-            buf.writeUuid(offer.seller());
-            buf.writeItemStack(offer.item());
-            buf.writeLong(offer.price());
+            offer.writeToBuf(buf);
         }
 
         ServerPlayNetworking.send(player, ID, buf);

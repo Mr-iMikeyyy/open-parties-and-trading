@@ -3,7 +3,6 @@ package net.madmike.gui;
 import com.glisco.numismaticoverhaul.item.NumismaticOverhaulItems;
 import net.madmike.OpenPartiesAndTrading;
 import net.madmike.packets.ClickOfferC2SPacket;
-import net.madmike.packets.TabChangeC2SPacket;
 import net.madmike.trade.TradeOffer;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -27,12 +26,14 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static net.madmike.OpenPartiesAndTradingClient.CLIENT_OFFERS;
+import static net.madmike.cache.TradingOffersCache.CLIENT_OFFERS;
 
 public class TradingScreen extends HandledScreen<TradingScreenHandler> {
+
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/generic_54.png");
 
     private TradeTab currentTab = TradeTab.MY_OFFERS;
+
     private final List<TradeOffer> offers = new ArrayList<>();
 
     public TradingScreen(TradingScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -60,7 +61,7 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
         }
 
         if (currentTab == TradeTab.SELL) {
-            setupSellTab(); // Your method for initializing the coin fields and sell slot
+            setupSellTab();
         }
     }
 
@@ -76,10 +77,14 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
+        this.drawBackground(context, delta, mouseX, mouseY);
         super.render(context, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(context, mouseX, mouseY);
 
+        drawWallet(context);
+    }
+
+    private void drawWallet(DrawContext context) {
         // 💰 Draw the coin balance from the screen handler
         long balance = this.handler.getCoinBalance();
         String balanceText = "Wallet: " + balance + " coins";
@@ -89,6 +94,11 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
         context.drawText(this.textRenderer, balanceText, textX, textY, 0xFFFFFF, false);
         ItemStack coin = new ItemStack(NumismaticOverhaulItems.GOLD_COIN); // or your actual coin item
         context.drawItem(coin, this.x + 5, this.y + 20);
+    }
+
+    private void switchTab(TradeTab tab) {
+        this.currentTab = tab;
+        OpenPartiesAndTrading.LOGGER.info("Switched to tab: " + tab.name());
 
         this.offers.clear();
 
@@ -142,19 +152,13 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
                         .forEach(this.offers::add);
             }
 
-            default -> {} // SELL tab doesn't show remote offers
+            default -> {
+            }
+
+            // Clear and reinitialize tab-specific widgets
+//        this.clearChildren();
+//        this.init();
         }
-    }
-
-    private void switchTab(TradeTab tab) {
-        this.currentTab = tab;
-        OpenPartiesAndTrading.LOGGER.info("Switched to tab: " + tab.name());
-
-        // Clear and reinitialize tab-specific widgets
-        this.clearChildren();
-        this.init();
-
-        TabChangeC2SPacket.send(tab);
     }
 
     private void setupSellTab() {
