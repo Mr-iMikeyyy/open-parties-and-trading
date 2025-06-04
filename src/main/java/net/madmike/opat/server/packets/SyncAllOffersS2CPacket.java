@@ -1,9 +1,9 @@
-package net.madmike.packets;
+package net.madmike.opat.server.packets;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.madmike.OpenPartiesAndTrading;
-import net.madmike.trade.TradeOffer;
+import net.madmike.opat.server.OpenPartiesAndTrading;
+import net.madmike.opat.server.trade.TradeOffer;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;

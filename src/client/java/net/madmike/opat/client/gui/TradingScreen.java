@@ -1,32 +1,30 @@
-package net.madmike.gui;
+package net.madmike.opat.client.gui;
 
 import com.glisco.numismaticoverhaul.item.NumismaticOverhaulItems;
-import net.madmike.OpenPartiesAndTrading;
-import net.madmike.packets.ClickOfferC2SPacket;
-import net.madmike.trade.TradeOffer;
+import net.madmike.opat.server.OpenPartiesAndTrading;
+import net.madmike.opat.server.gui.TradeTab;
+import net.madmike.opat.server.gui.TradingScreenHandler;
+import net.madmike.opat.client.packets.ClickOfferC2SPacket;
+import net.madmike.opat.server.trade.TradeOffer;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.gui.DrawContext;
 import xaero.pac.OpenPartiesAndClaims;
 import xaero.pac.client.api.OpenPACClientAPI;
 import xaero.pac.common.parties.party.Party;
-import xaero.pac.common.parties.party.member.PartyMember;
 import xaero.pac.common.parties.party.member.api.IPartyMemberAPI;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static net.madmike.cache.TradingOffersCache.CLIENT_OFFERS;
+import static net.madmike.opat.client.cache.TradingOffersCache.CLIENT_OFFERS;
 
 public class TradingScreen extends HandledScreen<TradingScreenHandler> {
 
@@ -66,6 +64,15 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
     }
 
     @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.drawBackground(context, delta, mouseX, mouseY);
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
+
+        drawWallet(context);
+    }
+
+    @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         context.drawTexture(
                 TEXTURE,
@@ -73,15 +80,6 @@ public class TradingScreen extends HandledScreen<TradingScreenHandler> {
                 0, 0,                   // Source texture UV
                 this.backgroundWidth, this.backgroundHeight
         );
-    }
-
-    @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.drawBackground(context, delta, mouseX, mouseY);
-        super.render(context, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(context, mouseX, mouseY);
-
-        drawWallet(context);
     }
 
     private void drawWallet(DrawContext context) {

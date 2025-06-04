@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.madmike.OpenPartiesAndTrading"
+          "net.madmike.opat.server.OpenPartiesAndTrading"
 		],
 		"client": [
-			"net.madmike.OpenPartiesAndTradingClient"
+			"net.madmike.opat.client.OpenPartiesAndTradingClient"
 		]
 	},
 	"depends": {

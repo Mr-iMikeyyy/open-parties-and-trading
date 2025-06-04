@@ -1,6 +1,6 @@
-package net.madmike.cache;
+package net.madmike.opat.client.cache;
 
-import net.madmike.trade.TradeOffer;
+import net.madmike.opat.server.trade.TradeOffer;
 
 import java.util.ArrayList;
 import java.util.List;

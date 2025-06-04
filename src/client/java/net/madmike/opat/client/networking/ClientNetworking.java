@@ -1,14 +1,14 @@
-package net.madmike.networking;
+package net.madmike.opat.client.networking;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.madmike.OpenPartiesAndTrading;
-import net.madmike.trade.TradeOffer;
+import net.madmike.opat.server.OpenPartiesAndTrading;
+import net.madmike.opat.server.trade.TradeOffer;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.madmike.cache.TradingOffersCache.CLIENT_OFFERS;
+import static net.madmike.opat.client.cache.TradingOffersCache.CLIENT_OFFERS;
 
 
 public class ClientNetworking {

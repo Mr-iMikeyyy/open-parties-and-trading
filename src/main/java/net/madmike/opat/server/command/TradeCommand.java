@@ -1,7 +1,7 @@
-package net.madmike.command;
+package net.madmike.opat.server.command;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.madmike.gui.TradingScreenHandler;
+import net.madmike.opat.server.gui.TradingScreenHandler;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.text.Text;
 import net.minecraft.server.network.ServerPlayerEntity;

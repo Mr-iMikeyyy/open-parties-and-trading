@@ -1,7 +1,7 @@
-package net.madmike.gui;
+package net.madmike.opat.server.gui;
 
 import com.glisco.numismaticoverhaul.ModComponents;
-import net.madmike.ModScreens;
+import net.madmike.opat.server.ModScreens;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;

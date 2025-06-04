@@ -1,4 +1,4 @@
-package net.madmike;
+package net.madmike.opat.server;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -6,7 +6,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
-import net.madmike.gui.TradingScreenHandler;
+import net.madmike.opat.server.gui.TradingScreenHandler;
 
 public class ModScreens {
     public static ScreenHandlerType<TradingScreenHandler> TRADING_SCREEN_HANDLER;

@@ -1,12 +1,13 @@
-package net.madmike.networking;
+package net.madmike.opat.server.networking;
 
 import com.glisco.numismaticoverhaul.ModComponents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.madmike.OpenPartiesAndTrading;
-import net.madmike.gui.TradeTab;
-import net.madmike.packets.SyncAllOffersS2CPacket;
+import net.madmike.opat.server.OpenPartiesAndTrading;
+import net.madmike.opat.server.data.OfferStorageState;
+import net.madmike.opat.server.gui.TradeTab;
+import net.madmike.opat.server.packets.SyncAllOffersS2CPacket;
 import net.madmike.trade.TradeManager;
-import net.madmike.trade.TradeOffer;
+import net.madmike.opat.server.trade.TradeOffer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class ServerNetworking {
     public static final Identifier CLICK_OFFER_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "click_offer");
     public static final Identifier LIST_OFFER_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "list_offer");
+    public static final Identifier LEFT_PARTY_PACKET = new Identifier(OpenPartiesAndTrading.MOD_ID, "left_party");
 
 
 
@@ -50,6 +52,15 @@ public class ServerNetworking {
                 // Resend updated offers to reflect change
                 List<TradeOffer> updated = TradeManager.getOffersFor(player.getUuid(), tab);
                 SyncAllOffersS2CPacket.send(player, updated);
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(LEFT_PARTY_PACKET, (server, player, handler, buf, responseSender) -> {
+            server.execute(() -> {
+                // Perform cleanup or refresh on the server
+                OfferStorageState.removeOffersFrom(player.getUuid());
+                // Optionally send sync packet
+                SyncAllOffersS2CPacket.sendToAll(server, OfferStorage.getAllOffers());
             });
         });
     }

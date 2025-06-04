@@ -1,4 +1,4 @@
-package net.madmike.gui;
+package net.madmike.opat.server.gui;
 
 public enum TradeTab {
     SELL,
